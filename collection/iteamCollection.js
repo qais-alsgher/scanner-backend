@@ -13,9 +13,10 @@ class itemCollection {
   async read(id) {
     try {
       if (id) {
-        let record = await this.model.findOne({ where: { id: id } });
+        console.log("in read in side if");
+        var record = await this.model.findOne({ where: { id: id } });
       } else {
-        let record = await this.model.findAll();
+        var record = await this.model.findAll();
       }
       return record;
     } catch (err) {
@@ -56,6 +57,19 @@ class itemCollection {
     } catch (err) {
       console.log(
         `Error in reading data from modle : (${this.model.name}) with code : ${code}`
+      );
+    }
+  }
+
+  async findByBarcode(barcode) {
+    try {
+      let record = await this.model.findOne({
+        where: { itemsBarCode: barcode },
+      });
+      return record;
+    } catch (err) {
+      console.log(
+        `Error in reading data from modle : (${this.model.name}) with barcode : ${barcode}`
       );
     }
   }

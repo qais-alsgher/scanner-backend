@@ -3,6 +3,7 @@ const { Sequelize, DataTypes } = require("sequelize");
 const items = require("./items");
 const user = require("./user");
 const collection = require("../collection/iteamCollection");
+require("dotenv").config();
 
 const sequelize = new Sequelize(process.env.DATABASE_URL, {});
 
