@@ -3,10 +3,12 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const itemsRouter = require("./routes/item.route");
+const userRouter = require("./routes/user.route");
 
 app.use(cors());
 app.use(express.json());
-// app.use(itemsRouter);
+app.use(itemsRouter);
+app.use(userRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

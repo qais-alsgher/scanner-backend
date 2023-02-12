@@ -6,15 +6,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    userEmail: {
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    userPassword: {
+    password: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    userPhone: {
+    PhoneNumber: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -55,21 +55,14 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  user.athinticateToken = (token) => {
-    try {
-      const parsedToken = jwt.verify(
-        token,
-        process.env.JWT_SECRET_KEY,
-        (err, payload) => {
-          if (err) {
-            throw new Error("Invalid Token");
-          }
-          return payload;
-        }
-      );
-    } catch (e) {
-      throw new Error(e.message);
-    }
+  user.authenticateToke = (token) => {
+    return jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decode) => {
+      if (err) {
+        return err;
+      } else {
+        return decode;
+      }
+    });
   };
 
   return user;
